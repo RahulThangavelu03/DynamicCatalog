@@ -1,53 +1,30 @@
-
-import { useEffect,useState } from "react"
-import { Products } from "./Data"
-import { Grid, Card, CardContent, CardMedia , Typography, Button } from "@mui/material";
+import {
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  CardMedia
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function HomePage(){
+const Home = ({ data }) => {
+  const navigate = useNavigate();
 
+  const groupedData = data.reduce((acc, item) => {
+    if (!acc[item.category]) acc[item.category] = [];
+    acc[item.category].push(item);
+    return acc;
+  }, {});
 
-
-    const [productslist,setProductslist] = useState([])
-
-useEffect(()=>{
-
-const Data = Products.reduce((acc,item)=>{
-
-if(!acc[item.category]){
-
-
-    acc[item.category] =[]
-}
-
-
-
-acc[item.category].push(item)
-
-
-return acc
-
-
-},{})
-
-
- setProductslist(Data)
-
- console.log(Data,"data")
-
-},[])
-
-
-
-
-    return (
+  return (
     <Grid container spacing={3} padding={3}>
-      {productslist && Object.keys(productslist).map((category) => {
-        const previewItems = productslist[category].slice(0, 3);
+      {Object.keys(groupedData).map((category) => {
+        const previewItems = groupedData[category].slice(0, 3);
 
         return (
           <Grid item xs={12} sm={6} md={4} key={category}>
-            <Card sx={{ cursor: "pointer" }}>
+            <Card sx={{ cursor: "pointer" }}   onClick={() => navigate(`/category/${category}`)}>
               
               {/* Image Preview */}
               <CardMedia
@@ -78,6 +55,6 @@ return acc
       })}
     </Grid>
   );
-}
+};
 
-export default HomePage
+export default Home;

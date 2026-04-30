@@ -1,13 +1,44 @@
-import React from "react"
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Box
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-function NavBar(){
+const Navbar = ({ categories }) => {
+  const navigate = useNavigate();
 
-    return(
+  return (
+    <AppBar position="static">
+      <Toolbar>
 
-<div>NavBar</div>
+        {/* Logo / Title */}
+        <Typography
+          variant="h6"
+          sx={{ flexGrow: 1, cursor: "pointer" }}
+          onClick={() => navigate("/")}
+        >
+          Product Catalog
+        </Typography>
 
+        {/* Category Links */}
+        <Box sx={{ display: { xs: "none", md: "block" } }}>
+          {categories.map((cat) => (
+            <Button
+              key={cat}
+              color="inherit"
+              onClick={() => navigate(`/category/${cat}`)}
+            >
+              {cat}
+            </Button>
+          ))}
+        </Box>
 
-    )
-}
+      </Toolbar>
+    </AppBar>
+  );
+};
 
-export default NavBar
+export default Navbar;

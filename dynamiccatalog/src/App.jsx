@@ -10,26 +10,39 @@ import { Products } from './Data'
 function App() {
 
 
+
+  const categories = [
+  ...new Set(Products.map(item => item.category))
+];
+
+
   return (
     <>
-    <NavBar></NavBar>
+
+
+
+
 
     <BrowserRouter>
-    
-    <Routes>
 
+    <NavBar categories={categories} />
+  <Routes>
+    <Route
+      path="/"
+      element={<HomePage data={Products} />}
+    />
 
-<Route element={<HomePage data = {Products}></HomePage>} path='/'>
-<Route element={<Category data ={Products}></Category>} path= "/category/:categoryName" />
-<Route element={<Item data={Products}></Item>}  path="/item/:id" />
+    <Route
+      path="/category/:categoryName"
+      element={<Category data={Products} />}
+    />
 
-</Route>
-
-    </Routes>
-    
-    
-    
-    </BrowserRouter>
+    <Route
+      path="/item/:id"
+      element={<Item data={Products} />}
+    />
+  </Routes>
+</BrowserRouter>
 
 
     </>
