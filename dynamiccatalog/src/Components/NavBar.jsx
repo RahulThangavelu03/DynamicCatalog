@@ -23,6 +23,12 @@ const Navbar = ({ categories }) => {
           Product Catalog
         </Typography>
 
+         <Button
+           
+              color="inherit"
+              onClick={() => navigate("/")}
+            >Home Page</Button>
+
         {/* Category Links */}
         <Box sx={{ display: { xs: "none", md: "block" } }}>
           {categories.map((cat) => (
