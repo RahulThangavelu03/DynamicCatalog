@@ -24,29 +24,21 @@ const CategoryPage = ({ data }) => {
   return (
 
 
-  
+<Box sx={{ mt: 10, px: 2, overflowX: "hidden" }}>
 
-<Box sx={{ mt: 10, px: 3 }}>
   <Grid container spacing={3}>
+
     {filteredItems.map((item, index) => (
-      <Grid
-        item
-        xs={12}      
-        sm={6}       
-        md={3}       
-        key={index}
-        sx={{
-          display: "flex", 
-        }}
-      >
+      
+      <Grid item xs={12} sm={6} md={3} key={index}>
+        
         <Card
           onClick={() => Handleclick(item)}
           sx={{
-            width: "100%",           
+            width: "100%",
+            height: "100%",
             display: "flex",
-            flexDirection: "column", 
-            justifyContent: "space-between", 
-            height: "100%",          
+            flexDirection: "column",
             borderRadius: 3,
             overflow: "hidden",
             cursor: "pointer",
@@ -57,38 +49,39 @@ const CategoryPage = ({ data }) => {
             }
           }}
         >
-          {/* IMAGE - Fixed height ensures uniformity */}
-          <CardMedia
+
+           <CardMedia
             component="img"
             image={item.image}
             alt={item.itemname}
+            loading="Lazy"
             sx={{
-              width: "100%",        
-              height: 180,           
-              objectFit: "cover",   
+              width: "100%",
+              height: 180,
+              objectFit: "cover"
             }}
-          />
+          />     
 
-          {/* CONTENT */}
-          <CardContent sx={{ flexGrow: 1 }}>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: 'bold',
-                
-                display: '-webkit-box',
-                WebkitLineClamp: 1,
-                WebkitBoxOrient: 'vertical',
-                overflow: 'hidden',
-              }}
-            >
+ 
+
+
+
+
+
+          <CardContent>
+            <Typography variant="h6" noWrap>
               {item.itemname}
             </Typography>
           </CardContent>
+
         </Card>
+
       </Grid>
+
     ))}
+
   </Grid>
+
 </Box>
 
 

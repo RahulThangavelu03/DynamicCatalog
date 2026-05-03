@@ -6,18 +6,23 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  Divider
+  Divider,
+  Button
 } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useParams ,useNavigate} from "react-router-dom";
 
 const ItemDetail = ({ data }) => {
   const { id } = useParams();
 
+  const Navigate=useNavigate()
+
+
+  
   
 
   const decodedId=decodeURIComponent(id);
 
-  console.log(decodedId,"dcoedi")
+
   const item = data.find(
   (i) => i.itemname === decodedId
 );
@@ -26,7 +31,23 @@ if (!item) {
   return <h2>Item not found</h2>;
 }
 
-console.log(item,"items")
+
+
+
+
+
+function HandleNaviagte(item){
+
+
+
+
+Navigate(`/category/${item.category}`)
+
+
+
+
+
+}
 
 
   return (
@@ -74,7 +95,8 @@ console.log(item,"items")
 
           {/* Specs List */}
           <Box>
-            {item.itemprops.map((prop, index) => (
+            { 
+            item.itemprops.map((prop, index) => (
               <Box
                 key={index}
                 sx={{
@@ -94,10 +116,16 @@ console.log(item,"items")
             ))}
           </Box>
 
+      
+
         </CardContent>
+        <Button variant="contained"  severity="warning" color="warning"  onClick={()=>HandleNaviagte(item)}>Go Back</Button>
       </Grid>
 
+
     </Grid>
+
+
 
   </Card>
 </Box>
